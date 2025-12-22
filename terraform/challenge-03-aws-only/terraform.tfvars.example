@@ -1,0 +1,4 @@
+project_name  = "ctf-25"
+aws_region    = "us-east-1"
+aws_profile   = "ekocloudsec"
+allowed_cidr  = "0.0.0.0/0"

@@ -1,0 +1,26 @@
+# Example Terraform Variables for Challenge-04-Azure-Only
+# Copy this file to terraform.tfvars and update with your Azure subscription details
+
+# Azure Configuration - REQUIRED
+azure_subscription_id = "your-azure-subscription-id"
+azure_tenant_id       = "your-azure-tenant-id"
+
+# Challenge Configuration - OPTIONAL (defaults provided)
+challenge_prefix = "ctf-25-ch04"
+environment     = "dev"
+location        = "East US"
+
+# App Service Configuration - OPTIONAL
+app_service_sku    = "F1"  # Options: F1 (Free), D1, B1, B2, B3, S1, S2, S3
+docker_image_tag   = "latest"
+
+# Additional Configuration Options
+# Uncomment and modify as needed
+
+# For production environments, consider:
+# app_service_sku = "S1"  # Better performance
+# location = "West Europe"  # Choose region closer to users
+
+# For Azure free accounts:
+# app_service_sku = "F1"  # Free tier (perfect for CTF challenges)
+# environment = "test"

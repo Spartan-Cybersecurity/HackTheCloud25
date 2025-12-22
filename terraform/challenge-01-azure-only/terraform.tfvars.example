@@ -1,0 +1,4 @@
+# Azure Configuration
+azure_subscription_id = "9e30d389-c701-4ae7-bff4-11bcab76c915"
+azure_tenant_id       = "c390256a-8963-4732-b874-85b7b0a4d514"
+azure_location        = "East US"

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCloudX Health - Patient Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #4a90e2;
+            border-bottom-color: #4a90e2;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success {
+            color: #27ae60;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .info {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .user-info h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-info p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .role-reader {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .role-admin {
+            background: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>🏥 MediCloudX Health</h1>
+            <p>Patient Care Management System</p>
+        </div>
+
+        <!-- Login/Signup Tabs -->
+        <div id="auth-section">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('login')">Login</div>
+                <div class="tab" onclick="switchTab('signup')">Sign Up</div>
+            </div>
+
+            <!-- Login Tab -->
+            <div id="login-tab" class="tab-content active">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div id="login-error" class="error"></div>
+                </form>
+            </div>
+
+            <!-- Signup Tab -->
+            <div id="signup-tab" class="tab-content">
+                <div class="info">
+                    <strong>Notice:</strong> Registration is restricted to healthcare professionals and authorized staff. 
+                    Please contact your department administrator if you need access.
+                </div>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-firstname">First Name</label>
+                        <input type="text" id="signup-firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-lastname">Last Name</label>
+                        <input type="text" id="signup-lastname" required>
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                    <div id="signup-error" class="error"></div>
+                    <div id="signup-success" class="success"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- User Dashboard (hidden initially) -->
+        <div id="dashboard-section" class="hidden">
+            <div class="user-info">
+                <h3>Welcome, <span id="user-name"></span>!</h3>
+                <p>Email: <span id="user-email"></span></p>
+                <p>Role: <span id="user-role" class="role-badge"></span></p>
+            </div>
+
+            <div id="reader-content">
+                <div class="info">
+                    <strong>Healthcare Staff Access</strong><br>
+                    You have standard access to patient records and basic system functions.
+                </div>
+            </div>
+
+            <div id="admin-content" class="hidden">
+                <div class="info">
+                    <strong>Medical Director Access</strong><br>
+                    You have elevated privileges to access sensitive patient data and system configurations.
+                </div>
+                <button class="btn" onclick="accessSecretData()">Access Patient Records</button>
+            </div>
+
+            <button class="btn" onclick="logout()" style="margin-top: 1rem; background: #6c757d;">Logout</button>
+        </div>
+    </div>
+
+    <!-- AWS SDK con versión actualizada que soporta CognitoIdentityServiceProvider -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1018.0.min.js"></script>
+    <script>
+        // Application Configuration
+        const COGNITO_CONFIG = {
+            region: '${region}',
+            userPoolId: '${user_pool_id}',
+            clientId: '${client_id}',
+            identityPoolId: '${identity_pool_id}',
+            apiEndpoint: '${api_endpoint}'
+        };
+
+        // Initialize AWS SDK
+        AWS.config.region = COGNITO_CONFIG.region;
+        const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
+        const cognitoIdentity = new AWS.CognitoIdentity();
+
+        let currentUser = null;
+
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[onclick="switchTab('$${tab}')"]`).classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(`$${tab}-tab`).classList.add('active');
+        }
+
+        // Email domain validation
+        function validateEmail(email) {
+            const allowedDomains = ['medicloudx.com', 'healthcorp.org'];
+            const domain = email.split('@')[1];
+            return allowedDomains.includes(domain);
+        }
+
+        // Signup form handler
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const firstName = document.getElementById('signup-firstname').value;
+            const lastName = document.getElementById('signup-lastname').value;
+
+            // Email domain validation
+            if (!validateEmail(email)) {
+                showError('signup-error', 'Email domain not authorized. Please use your healthcare organization email address.');
+                return;
+            }
+
+            try {
+                const params = {
+                    ClientId: COGNITO_CONFIG.clientId,
+                    Username: email,
+                    Password: password,
+                    UserAttributes: [
+                        { Name: 'email', Value: email },
+                        { Name: 'given_name', Value: firstName },
+                        { Name: 'family_name', Value: lastName }
+                    ]
+                };
+
+                await cognitoIdentityServiceProvider.signUp(params).promise();
+                showSuccess('signup-success', 'Registration successful! Please check your email for verification code.');
+                
+                // Show verification form
+                showVerificationForm(email);
+            } catch (error) {
+                showError('signup-error', error.message);
+            }
+        });
+
+        // Login form handler
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const params = {
+                    AuthFlow: 'USER_PASSWORD_AUTH',
+                    ClientId: COGNITO_CONFIG.clientId,
+                    AuthParameters: {
+                        USERNAME: email,
+                        PASSWORD: password
+                    }
+                };
+
+                const result = await cognitoIdentityServiceProvider.initiateAuth(params).promise();
+                
+                if (result.AuthenticationResult) {
+                    const tokens = {
+                        accessToken: result.AuthenticationResult.AccessToken,
+                        idToken: result.AuthenticationResult.IdToken,
+                        refreshToken: result.AuthenticationResult.RefreshToken
+                    };
+
+                    // Store authentication tokens
+                    localStorage.setItem('accessToken', tokens.accessToken);
+                    localStorage.setItem('idToken', tokens.idToken);
+                    localStorage.setItem('refreshToken', tokens.refreshToken);
+
+                    await loadUserProfile(tokens.accessToken);
+                }
+            } catch (error) {
+                showError('login-error', error.message);
+            }
+        });
+
+        async function loadUserProfile(accessToken) {
+            try {
+                const params = {
+                    AccessToken: accessToken
+                };
+
+                const result = await cognitoIdentityServiceProvider.getUser(params).promise();
+                
+                const user = {
+                    email: result.UserAttributes.find(attr => attr.Name === 'email')?.Value,
+                    firstName: result.UserAttributes.find(attr => attr.Name === 'given_name')?.Value,
+                    lastName: result.UserAttributes.find(attr => attr.Name === 'family_name')?.Value,
+                    role: result.UserAttributes.find(attr => attr.Name === 'custom:role')?.Value || 'reader'
+                };
+
+                currentUser = user;
+                showDashboard(user);
+            } catch (error) {
+                console.error('Error loading user profile:', error);
+                showError('login-error', 'Failed to load user profile');
+            }
+        }
+
+        function showDashboard(user) {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('dashboard-section').classList.remove('hidden');
+
+            document.getElementById('user-name').textContent = `$${user.firstName} $${user.lastName}`;
+            document.getElementById('user-email').textContent = user.email;
+            
+            const roleElement = document.getElementById('user-role');
+            roleElement.textContent = user.role;
+            roleElement.className = `role-badge role-$${user.role}`;
+
+            // Show appropriate content based on role
+            if (user.role === 'admin') {
+                document.getElementById('reader-content').classList.add('hidden');
+                document.getElementById('admin-content').classList.remove('hidden');
+            } else {
+                document.getElementById('reader-content').classList.remove('hidden');
+                document.getElementById('admin-content').classList.add('hidden');
+            }
+        }
+
+        async function accessSecretData() {
+            try {
+                const idToken = localStorage.getItem('idToken');
+                if (!idToken) {
+                    alert('No valid session found. Please login first.');
+                    return;
+                }
+
+                // Show loading message
+                const button = document.querySelector('#admin-content button');
+                const originalText = button.textContent;
+                button.textContent = 'Loading Patient Records...';
+                button.disabled = true;
+
+                // Call the Patient API
+                const response = await fetch(COGNITO_CONFIG.apiEndpoint, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer $${idToken}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Display patient records in a better format
+                    if (data.success && data.data) {
+                        displayPatientRecords(data.data);
+                    } else {
+                        alert('No patient records found or invalid response format.');
+                    }
+                } else {
+                    const errorData = await response.json();
+                    if (response.status === 403) {
+                        alert('Access Denied: Administrator privileges required to view patient records.\n\nHint: Check your user role permissions.');
+                    } else {
+                        alert(`Failed to access patient records: $${errorData.message || 'Unknown error'}`);
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error accessing patient data:', error);
+                alert('Failed to access patient records: ' + error.message);
+            } finally {
+                // Restore button
+                const button = document.querySelector('#admin-content button');
+                if (button) {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }
+            }
+        }
+
+        function displayPatientRecords(records) {
+            // Create a modal or dedicated section to show patient records
+            const recordsHtml = records.map(record => `
+                <div class="patient-record" style="border: 1px solid #ddd; margin: 10px 0; padding: 15px; border-radius: 5px; background: #f9f9f9;">
+                    <h4 style="color: #2c5aa0; margin-top: 0;">Patient ID: $${record.patient_id}</h4>
+                    <p><strong>Name:</strong> $${record.name}</p>
+                    <p><strong>Department:</strong> $${record.department}</p>
+                    <p><strong>Diagnosis:</strong> $${record.diagnosis}</p>
+                    <p><strong>Status:</strong> <span style="color: $${record.status === 'active' ? 'green' : 'gray'}">$${record.status}</span></p>
+                    <p><strong>Created:</strong> $${record.created_at}</p>
+                    <p><strong>Notes:</strong> $${record.notes}</p>
+                    $${record.access_level ? `<p><strong>Access Level:</strong> <span style="color: red; font-weight: bold;">$${record.access_level}</span></p>` : ''}
+                </div>
+            `).join('');
+
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0,0,0,0.8); z-index: 1000; 
+                display: flex; align-items: center; justify-content: center;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 10px; max-width: 80%; max-height: 80%; overflow-y: auto;">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="color: #2c5aa0; margin: 0;">MediCloudX Patient Records ($${records.length} records)</h2>
+                        <button onclick="this.parentElement.parentElement.parentElement.remove()" 
+                                style="margin-left: auto; padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">✕ Close</button>
+                    </div>
+                    $${recordsHtml}
+                    <div style="margin-top: 20px; padding: 10px; background: #e8f5e8; border-radius: 5px;">
+                        <p style="margin: 0; font-size: 12px; color: #666;">
+                            <strong>System Access:</strong> You have successfully accessed the secure patient database with administrator privileges.
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function logout() {
+            localStorage.clear();
+            currentUser = null;
+            document.getElementById('auth-section').classList.remove('hidden');
+            document.getElementById('dashboard-section').classList.add('hidden');
+            
+            // Reset forms
+            document.getElementById('login-form').reset();
+            document.getElementById('signup-form').reset();
+            
+            // Clear error messages
+            document.querySelectorAll('.error, .success').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+        }
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function showSuccess(elementId, message) {
+            const successElement = document.getElementById(elementId);
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+        }
+
+        function showVerificationForm(email) {
+            // Simple verification form (could be enhanced)
+            const code = prompt('Please enter the verification code sent to your email:');
+            if (code) {
+                verifyEmail(email, code);
+            }
+        }
+
+        async function verifyEmail(email, code) {
+            try {
+                const params = {
+                    ClientId: COGNITO_CONFIG.clientId,
+                    Username: email,
+                    ConfirmationCode: code
+                };
+
+                await cognitoIdentityServiceProvider.confirmSignUp(params).promise();
+                alert('Email verified successfully! You can now login.');
+                switchTab('login');
+            } catch (error) {
+                alert('Verification failed: ' + error.message);
+            }
+        }
+
+        // Check for existing session on page load
+        window.addEventListener('load', () => {
+            const accessToken = localStorage.getItem('accessToken');
+            if (accessToken) {
+                loadUserProfile(accessToken);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+challenges:
+  challenge-01-aws-only:
+    name: "Challenge 01 - AWS S3 Website"
+    description: "Basic AWS S3 static website hosting CTF challenge"
+    provider: "aws"
+    difficulty: "basic"
+    directory: "terraform/challenge-01-aws-only"
+    backend_config: "backend-configs/aws.hcl"
+    web_content: "web-content/aws-challenge-01"
+    variables:
+      aws_region: "us-east-1"
+      aws_profile: "ekocloudsec"
+      project_name: "ctf-25"
+    outputs:
+      - "aws_s3_website_endpoint"
+      - "aws_s3_bucket_name" 
+      - "aws_flag_url"
+      - "challenge_summary"
+    tags:
+      - "aws"
+      - "s3"
+      - "static-website"
+      - "basic"
+
+  challenge-01-azure-only:
+    name: "Challenge 01 - Azure Storage + AD"
+    description: "Azure Storage static website with Azure AD integration"
+    provider: "azure"
+    difficulty: "intermediate"
+    directory: "terraform/challenge-01-azure-only"
+    backend_config: "backend-configs/azure.hcl"
+    web_content: "web-content/azure-challenge-01"
+    variables:
+      azure_subscription_id: "${AZURE_SUBSCRIPTION_ID}"
+      azure_tenant_id: "${AZURE_TENANT_ID}"
+      azure_location: "East US"
+      project_name: "ctf-25"
+    outputs:
+      - "azure_storage_website_endpoint"
+      - "azure_storage_account_name"
+      - "azure_flag_url"
+      - "research_portal_url"
+      - "medicloud_sas_token"
+      - "azure_ad_app_id"
+      - "certificate_thumbprint"
+      - "challenge_summary"
+      - "attack_vectors"
+    tags:
+      - "azure"
+      - "storage"
+      - "azure-ad"
+      - "sas-tokens"
+      - "intermediate"
+
+  challenge-01-gcp-only:
+    name: "Challenge 01 - GCP Cloud Storage"
+    description: "GCP Cloud Storage public bucket CTF challenge"
+    provider: "gcp"
+    difficulty: "basic"
+    directory: "terraform/challenge-01-gcp-only"
+    backend_config: "backend-configs/challenge-01-gcp.hcl"
+    web_content: "web-content/gcp-challenge-01"
+    variables:
+      gcp_project_id: "${GCP_PROJECT_ID}"
+      gcp_region: "us-central1"
+      project_name: "ctf-25"
+    outputs:
+      - "gcp_bucket_name"
+      - "gcp_website_url"
+      - "gcp_flag_url"
+      - "challenge_summary"
+    tags:
+      - "gcp"
+      - "cloud-storage"
+      - "public-bucket"
+      - "basic"
+
+  challenge-02-aws-only:
+    name: "Challenge 02 - AWS Cognito Privilege Escalation"
+    description: "Advanced AWS Cognito privilege escalation with API Gateway and custom attributes"
+    provider: "aws"
+    difficulty: "intermediate"
+    directory: "terraform/challenge-02-aws-only"
+    backend_config: "backend-configs/aws.hcl"
+    web_content: "web-content/aws-challenge-02"
+    variables:
+      aws_region: "us-east-1"
+      aws_profile: "ekocloudsec"
+      project_name: "ctf-25"
+    outputs:
+      - "user_pool_id"
+      - "user_pool_client_id"
+      - "web_application_url"
+      - "api_gateway_url"
+      - "aws_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+    tags:
+      - "aws"
+      - "cognito"
+      - "api-gateway"
+      - "privilege-escalation"
+      - "advanced"
+
+  challenge-03-aws-only:
+    name: "challenge-03-aws-only"
+    description: "AWS EC2 SSRF to S3 Access - Exploit SSRF vulnerability to access EC2 metadata and retrieve AWS credentials for S3 bucket access"
+    provider: "aws"
+    difficulty: "intermediate"
+    directory: "terraform/challenge-03-aws-only"
+    backend_config: "backend-configs/aws.hcl"
+    web_content_path: null  # No separate web content - application deployed on EC2
+    variables:
+      aws_region: "us-east-1"
+      aws_profile: "ekocloudsec"
+      project_name: "ctf-25"
+      allowed_cidr: "0.0.0.0/0"
+    outputs:
+      - "web_application_url"
+      - "web_application_ip"
+      - "ec2_instance_id"
+      - "credentials_bucket_name"
+      - "flag_bucket_name"
+      - "challenge_instructions"
+      - "aws_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+    tags:
+      - "aws"
+      - "ec2"
+      - "ssrf"
+      - "metadata-service"
+      - "s3"
+      - "iam"
+      - "credential-escalation"
+      - "intermediate"
+
+  challenge-04-aws-only:
+    name: "challenge-04-aws-only"
+    description: "CloudCopy Attack - Exploit EBS snapshot permissions to extract NTDS hashes from Windows Domain Controller"
+    provider: "aws"
+    difficulty: "advanced"
+    directory: "terraform/challenge-04-aws-only"
+    backend_config: "backend-configs/aws.hcl"
+    web_content_path: null  # No separate web content - Windows DC deployed directly
+    variables:
+      aws_region: "us-east-1"
+      aws_profile: "ekocloudsec"
+      project_name: "ctf-25"
+      challenge_name: "challenge-04-aws-only"
+      environment: "dev"
+      domain_name: "medicloudx.local"
+      dc_admin_password: "EkoCloudSec2025!"
+      svc_flag_password: "Password123!"
+      allowed_cidr: "0.0.0.0/0"
+      create_key_pair: false
+      make_snapshot_public: true
+    outputs:
+      - "challenge_info"
+      - "domain_controller_info"
+      - "snapshot_info"
+      - "iam_user_credentials"
+      - "attack_flow_summary"
+      - "target_credentials"
+      - "networking_info"
+      - "aws_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+    tags:
+      - "aws"
+      - "ebs"
+      - "snapshots"
+      - "ntds"
+      - "active-directory"
+      - "windows"
+      - "iam"
+      - "cloudcopy"
+      - "credential-dumping"
+      - "advanced"
+
+  challenge-05-aws-only:
+    name: "Challenge 05 - MediCloudX Data Exporter"
+    description: "Binary reverse engineering to extract embedded AWS credentials from healthcare data export tool"
+    provider: "aws"
+    difficulty: "intermediate"
+    directory: "terraform/challenge-05-aws-only"
+    backend_config: "backend-configs/aws.hcl"
+    web_content_path: null  # No web content - binary analysis challenge
+    preparation_script: "prepare_challenge.sh"  # Compiles x86_linux binaries with Docker
+    variables:
+      aws_region: "us-east-1"
+      aws_profile: "ekocloudsec"
+      environment: "dev"
+      flag_content: "CLD[6b2e7f8a-5d3c-4a1e-9b8f-2c6d8e4a7f9b]"
+      patient_records_count: 50
+    outputs:
+      - "challenge_info"
+      - "binary_build_info"
+      - "embedded_credentials"
+      - "s3_details"
+      - "binary_download"
+      - "challenge_instructions"
+      - "aws_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+    tags:
+      - "aws"
+      - "s3"
+      - "reverse-engineering"
+      - "binary-analysis"
+      - "embedded-credentials"
+      - "healthcare"
+      - "static-analysis"
+      - "dynamic-analysis"
+      - "docker"
+      - "x86-linux"
+      - "advanced"
+
+  challenge-03-azure-only:
+    name: "Azure Key Vault Privilege Escalation"
+    description: "Use compromised Service Principal from Challenge-01 to access Key Vault secrets"
+    provider: "azure"
+    difficulty: "advanced"
+    directory: "terraform/challenge-03-azure-only"
+    backend_config: "backend-configs/azure.hcl"
+    
+    # Dependencies - requires challenge-01-azure-only to be deployed first
+    dependencies:
+      - "challenge-01-azure-only"
+    
+    variables:
+      azure_location: "East US"
+      azure_subscription_id: "${AZURE_SUBSCRIPTION_ID}"
+      azure_tenant_id: "${AZURE_TENANT_ID}"
+      # Dynamic dependency - gets display name from challenge-01-azure-only output
+      azure_ad_app_display_name: "${challenge-01-azure-only.azure_ad_app_display_name}"
+      
+    outputs:
+      - "challenge_info"
+      - "key_vault_name"
+      - "key_vault_uri"
+      - "service_principal_object_id"
+      - "service_principal_client_id"
+      - "role_assignments"
+      - "api_endpoints"
+      - "attack_summary"
+      - "azure_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+      
+    tags:
+      - "azure"
+      - "key-vault"
+      - "privilege-escalation"
+      - "service-principal"
+      - "rbac"
+
+  challenge-04-azure-only:
+    name: "MediCloudX Workforce Onboarding"
+    description: "Bypass Next.js middleware authentication to access Azure AD user creation API"
+    provider: "azure"
+    difficulty: "advanced"
+    directory: "terraform/challenge-04-azure-only"
+    backend_config: "backend-configs/azure.hcl"
+    
+    # No dependencies - standalone challenge
+    dependencies: []
+    
+    variables:
+      azure_location: "East US"
+      azure_subscription_id: "${AZURE_SUBSCRIPTION_ID}"
+      azure_tenant_id: "${AZURE_TENANT_ID}"
+      challenge_prefix: "ctf-25-ch04"
+      environment: "dev"
+      docker_image_tag: "latest"
+      app_service_sku: "F1"
+      
+    outputs:
+      - "resource_group_name"
+      - "acr_name"
+      - "acr_login_server"
+      - "app_service_url"
+      - "app_service_name"
+      - "azure_ad_application_id"
+      - "service_principal_object_id"
+      - "key_vault_name"
+      - "key_vault_uri"
+      - "challenge_info"
+      - "api_endpoints"
+      - "azure_ad_permissions"
+      - "security_notes"
+      - "azure_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+      
+    tags:
+      - "azure"
+      - "app-service"
+      - "container-registry"
+      - "azure-ad"
+      - "key-vault"
+      - "next-js"
+      - "middleware-bypass"
+      - "oauth"
+      - "graph-api"
+      - "cve-2025-29927"
+
+  challenge-02-gcp-only:
+    name: "Secret Manager Misconfiguration"
+    description: "Access misconfigured Secret Manager secret to retrieve flag"
+    provider: "gcp"
+    difficulty: "intermediate"
+    directory: "terraform/challenge-02-gcp-only"
+    backend_config: "backend-configs/challenge-02-gcp.hcl"
+    
+    # No dependencies - standalone challenge
+    dependencies: []
+    
+    variables:
+      gcp_project_id: "${GCP_PROJECT_ID}"
+      gcp_region: "us-central1"
+      project_name: "ctf-25"
+      gcp_user_email: "${GCP_USER_EMAIL}"
+      
+    outputs:
+      - "gcp_secret_name"
+      - "gcp_secret_id"
+      - "gcp_secret_version"
+      - "secret_full_name"
+      - "flag_identifier"
+      - "challenge_info"
+      - "api_endpoints"
+      - "gcp_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+      
+    tags:
+      - "gcp"
+      - "secret-manager"
+      - "iam-misconfiguration"
+      - "public-access"
+      - "allusers"
+      - "intermediate"
+
+  challenge-03-gcp-only:
+    name: "Private Bucket Access"
+    description: "Access private bucket using exposed service account credentials to retrieve flag"
+    provider: "gcp"
+    difficulty: "intermediate"
+    directory: "terraform/challenge-03-gcp-only"
+    backend_config: "backend-configs/challenge-03-gcp.hcl"
+    
+    # No dependencies - standalone challenge
+    dependencies: []
+    
+    variables:
+      gcp_project_id: "${GCP_PROJECT_ID}"
+      gcp_region: "us-central1"
+      project_name: "ctf-25"
+      gcp_user_email: "${GCP_USER_EMAIL}"
+      
+    outputs:
+      - "gcp_bucket_name"
+      - "gcp_bucket_url"
+      - "bucket_self_link"
+      - "flag_path"
+      - "flag_url"
+      - "service_account_email"
+      - "service_account_key_file"
+      - "challenge_info"
+      - "api_endpoints"
+      - "gcp_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+      
+    tags:
+      - "gcp"
+      - "cloud-storage"
+      - "private-bucket"
+      - "service-account"
+      - "credential-exposure"
+      - "authentication"
+      - "privilege-escalation"
+      - "intermediate"
+
+  challenge-04-gcp-only:
+    name: "Firestore Database Audit Log Analysis"
+    description: "Analyze Firestore audit logs to find hidden flag in log entries"
+    provider: "gcp"
+    difficulty: "intermediate"
+    directory: "terraform/challenge-04-gcp-only"
+    backend_config: "backend-configs/challenge-04-gcp.hcl"
+    
+    # No dependencies - standalone challenge
+    dependencies: []
+    
+    variables:
+      gcp_project_id: "${GCP_PROJECT_ID}"
+      gcp_region: "us-central1"
+      project_name: "ctf-25"
+      
+    outputs:
+      - "gcp_database_name"
+      - "gcp_collection_path"
+      - "gcp_database_url"
+      - "challenge_hint"
+      - "gcp_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+      - "challenge_info"
+      
+    tags:
+      - "gcp"
+      - "firestore"
+      - "database"
+      - "audit-logs"
+      - "log-analysis"
+      - "data-exposure"
+      - "forensics"
+      - "intermediate"
+
+  challenge-05-gcp-only:
+    name: "Mobile Security - Android APK Analysis"
+    description: "Analyze Android APK to extract Firebase configurations and find hidden flag"
+    provider: "gcp"
+    difficulty: "advanced"
+    directory: "terraform/challenge-05-gcp-only"
+    backend_config: "backend-configs/challenge-05-gcp.hcl"
+    
+    # Manual challenge - no dependencies
+    dependencies: []
+    
+    variables:
+      project_name: "ctf-25"
+      
+    outputs:
+      - "challenge_info"
+      - "android_project_path"
+      - "google_services_path"
+      - "setup_instructions"
+      - "apk_build_info"
+      - "gcp_flag"
+      - "challenge_summary"
+      - "attack_vectors"
+      
+    tags:
+      - "gcp"
+      - "mobile-security"
+      - "android"
+      - "apk-analysis"
+      - "static-analysis"
+      - "firebase"
+      - "reverse-engineering"
+      - "manual-challenge"
+      - "advanced"
+      
+    # Special configuration for manual challenges
+    challenge_type: "manual_analysis"
+    deployment_note: "This challenge requires manual APK compilation and analysis"
+
+# Global configuration
+global:
+  project_name: "ctf-25"
+  terraform_version: ">= 1.5.0"
+  log_level: "INFO"
+  default_auto_approve: false
+  parallel_execution: false
+  
+providers:
+  aws:
+    backend_type: "s3"
+    default_region: "us-east-1"
+    profile: "ekocloudsec"
+    
+  azure:
+    backend_type: "azurerm"
+    default_location: "East US"
+    required_env_vars:
+      - "AZURE_SUBSCRIPTION_ID"
+      - "AZURE_TENANT_ID"
+      
+  gcp:
+    backend_type: "gcs"
+    default_region: "us-central1"
+    required_env_vars:
+      - "GCP_PROJECT_ID"

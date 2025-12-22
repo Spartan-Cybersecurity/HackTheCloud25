@@ -1,0 +1,37 @@
+# Example Terraform variables file for Challenge 04 - AWS Only
+# Copy this file to terraform.tfvars and modify the values as needed
+
+# AWS Configuration
+aws_region  = "us-east-1"
+aws_profile = "default"  # Change to your AWS profile name
+
+# Environment Configuration
+environment = "dev"
+project_name = "ctf-25"
+challenge_name = "challenge-04-aws-only"
+
+# Domain Configuration
+domain_name = "medicloudx.local"
+
+# Security Configuration (CHANGE THESE PASSWORDS!)
+dc_admin_password = "EkoCloudSec2025!"
+svc_flag_password = "Password123!"  # Intentionally weak for CTF
+
+# Network Configuration
+allowed_cidr_blocks = ["0.0.0.0/0"]  # Restrict this to your IP range for security
+allowed_cidr = "0.0.0.0/0"          # Legacy variable
+
+# EC2 Key Pair Configuration (Optional)
+create_key_pair = false  # Set to true if you want to create a key pair for RDP access
+public_key = ""          # Your SSH public key (only needed if create_key_pair = true)
+
+# Example with restricted access:
+# allowed_cidr_blocks = ["203.0.113.0/24", "198.51.100.0/24"]
+# allowed_cidr = "203.0.113.0/24"
+
+# Example with key pair:
+# create_key_pair = true
+# public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC... your-email@example.com"
+
+# CTF Configuration
+make_snapshot_public = true  # Makes snapshot publicly accessible (intentional vulnerability)

@@ -1,0 +1,21 @@
+# HackTheCloud25 CTF Manager Dependencies
+
+# Core dependencies
+PyYAML>=6.0.1              # YAML configuration parsing
+click>=8.1.7                # Enhanced CLI framework (optional alternative to argparse)
+
+# Development and testing (optional)
+pytest>=7.4.0              # Testing framework
+pytest-cov>=4.1.0          # Coverage reporting
+black>=23.7.0              # Code formatting
+flake8>=6.0.0              # Linting
+
+# Cloud SDK dependencies (optional - only if programmatic API access needed)
+# boto3>=1.34.0             # AWS SDK
+# azure-identity>=1.15.0    # Azure authentication
+# azure-mgmt-resource>=23.0.0 # Azure resource management
+# google-cloud-core>=2.4.1  # GCP core utilities
+
+# Note: The framework primarily uses Terraform CLI commands, so cloud SDKs
+# are not required for basic operation. Terraform handles cloud authentication
+# and resource management. Uncomment above if you need programmatic cloud API access.

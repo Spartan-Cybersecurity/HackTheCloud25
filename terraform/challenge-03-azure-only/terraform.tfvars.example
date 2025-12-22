@@ -1,0 +1,20 @@
+# Example Terraform variables for Challenge-03-Azure-Only
+# Copy this file to terraform.tfvars and update with your values
+
+# Azure subscription and tenant IDs (required)
+azure_subscription_id = "your-subscription-id-here"
+azure_tenant_id       = "your-tenant-id-here"
+
+# Azure region for resources
+azure_location = "East US"
+
+# Application name prefix from Challenge-01 (should match Challenge-01 configuration)
+challenge_01_app_name_prefix = "MediCloudXApp"
+
+# Tags for all resources
+tags = {
+  Environment = "CTF-25"
+  Challenge   = "Challenge-03-Azure-Only"
+  Purpose     = "Key Vault Privilege Escalation"
+  Owner       = "EkoCloudSec"
+}

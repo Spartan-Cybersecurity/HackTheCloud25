@@ -1,0 +1,9 @@
+# Example Terraform variables file for AWS-only Challenge 1
+# Copy this file to terraform.tfvars and update with your values
+
+# AWS Configuration
+aws_region  = "us-east-1"
+aws_profile = "ekocloudsec"
+
+# Optional: Override project name
+# project_name = "ctf-25"

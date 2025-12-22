@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">MediCloudX Health Manager</string>
+    
+    <!-- Firebase Configuration -->
+    <string name="google_app_id" translatable="false">1:821367905686:android:6481736ed8fb063d95d1b7</string>
+    <string name="gcm_defaultSenderId" translatable="false">arctic-bee-470901-c4</string>
+    <string name="project_id" translatable="false">arctic-bee-470901-c4</string>
+    <string name="google_api_key" translatable="false">AIzaSyBGKPKopYsBhYQmPfzZAlk_cHpv7MW8QWQ</string>
+    <string name="firebase_database_url" translatable="false">https://arctic-bee-470901-c4-default-rtdb.firebaseio.com/</string>
+    <string name="google_storage_bucket" translatable="false">arctic-bee-470901-c4.appspot.com</string>
+    <string name="firebase_remote_config_url" translatable="false">https://firebaseremoteconfig.googleapis.com/v1/projects/arctic-bee-470901-c4/namespaces/firebase:fetch</string>
+    
+    <!-- Authentication -->
+    <string name="login_title">MediCloudX Health Manager</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">Iniciar Sesión</string>
+    
+    <!-- Remote Config Keys -->
+    <string name="remote_config_admin_token">admin_debug_token</string>
+    <string name="remote_config_backup_key">backup_encryption_key</string>
+    
+    <!-- Login Activity -->
+    <string name="login_subtitle">Sistema Integral de Gestión de Pacientes</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="copyright">© 2024 MediCloudX Corporation. Todos los derechos reservados.</string>
+    
+    <!-- Main Activity -->
+    <string name="patients_title">Pacientes</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_patient">Agregar Paciente</string>
+</resources>

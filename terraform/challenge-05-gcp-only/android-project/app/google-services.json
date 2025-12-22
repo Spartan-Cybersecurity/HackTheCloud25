@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "470901",
+    "firebase_url": "https://arctic-bee-470901-c4-default-rtdb.firebaseio.com",
+    "project_id": "arctic-bee-470901-c4",
+    "storage_bucket": "arctic-bee-470901-c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470901:android:7f3d4e5c6b2a1f9g8h2i",
+        "android_client_info": {
+          "package_name": "com.medicloudx.healthmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470901-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGKPKopYsBhYQmPfzZAlk_cHpv7MW8QWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470901-abcdefghijklmnopqrstuvwxyz.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

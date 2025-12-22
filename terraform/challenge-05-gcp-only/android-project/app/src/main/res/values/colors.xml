@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#2E7D32</color>
+    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="colorAccent">#FF5722</color>
+    
+    <!-- Secondary Colors -->
+    <color name="colorSecondary">#7ED321</color>
+    <color name="colorSecondaryDark">#5BA017</color>
+    
+    <!-- Text Colors -->
+    <color name="colorText">#212121</color>
+    <color name="colorTextSecondary">#757575</color>
+    <color name="colorTextLight">#FFFFFF</color>
+    <color name="colorTextOnPrimary">#FFFFFF</color>
+    <color name="colorSubtitleLight">#E8F5E8</color>
+    <color name="colorCopyrightLight">#C8E6C9</color>
+    
+    <!-- Background Colors -->
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorCard">#FFFFFF</color>
+    
+    <!-- Status Colors -->
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorWarning">#FF9800</color>
+    <color name="colorError">#F44336</color>
+    <color name="colorInfo">#2196F3</color>
+    
+    <!-- Risk Level Colors -->
+    <color name="riskLow">#4CAF50</color>
+    <color name="riskMedium">#FF9800</color>
+    <color name="riskHigh">#F44336</color>
+    
+    <!-- Medical Colors -->
+    <color name="medicalBlue">#1976D2</color>
+    <color name="medicalGreen">#388E3C</color>
+    <color name="medicalRed">#D32F2F</color>
+    <color name="medicalOrange">#F57C00</color>
+    
+    <!-- System Colors -->
+    <color name="systemFlag">#9C27B0</color>
+    <color name="systemWarning">#FF5722</color>
+    <color name="systemInfo">#00BCD4</color>
+    
+    <!-- Gradient Colors -->
+    <color name="gradientStart">#2E7D32</color>
+    <color name="gradientEnd">#1B5E20</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlay_light">#33000000</color>
+    <color name="overlay_dark">#66000000</color>
+    
+    <!-- Transparent -->
+    <color name="transparent">#00000000</color>
+    
+    <!-- Common Material Colors -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray">#9E9E9E</color>
+    <color name="gray_dark">#424242</color>
+</resources>

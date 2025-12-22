@@ -1,0 +1,9 @@
+# Example Terraform variables file for GCP-only Challenge 1
+# Copy this file to terraform.tfvars and update with your values
+
+# GCP Configuration
+gcp_project_id = "arctic-bee-470901-c4"
+gcp_region     = "us-east1"
+
+# Optional: Override project name
+# project_name = "ctf-25"

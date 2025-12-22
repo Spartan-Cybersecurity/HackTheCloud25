@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCloudX Labs - Cardiovascular Research Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 900px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .research-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .research-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .research-title::before {
+            content: "🫀";
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .research-content {
+            color: #34495e;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .research-image {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .research-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .access-info {
+            background: #e8f5e8;
+            border: 1px solid #27ae60;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .access-title {
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .credentials {
+            font-family: 'Courier New', monospace;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .metadata {
+            font-size: 0.8em;
+            color: #95a5a6;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">MediCloudX Labs</div>
+            <div class="subtitle">Advanced Cardiovascular Research Division</div>
+        </div>
+
+        <div class="research-section">
+            <h2 class="research-title">Project MediCloud - Cardiovascular Analysis</h2>
+            
+            <div class="research-content">
+                <p>Welcome to the MediCloudX Labs research portal. Our team is conducting groundbreaking research 
+                in cardiovascular medicine using advanced cloud-based analytics and machine learning algorithms.</p>
+                
+                <p>This secure portal provides access to our latest research findings, including high-resolution 
+                cardiac imaging data and preliminary analysis results from our ongoing clinical trials.</p>
+            </div>
+
+            <div class="research-image">
+                <img src="https://ctf25sa73bb26c9.blob.core.windows.net/medicloud-research/close-up-doctor-holding-red-heart.jpg??sv=2018-11-09&sr=c&st=2025-12-17T20:59:19Z&se=2026-12-17T20:59:19Z&sp=rl&spr=https&sig=khMBVZ48WKzjqdo81moa4v6aXkbFNFuyxVgoOHSV3e8%3D" 
+                     alt="Cardiovascular Research - Doctor with Heart Model" 
+                     title="MediCloudX Cardiovascular Research">
+                <div class="metadata">
+                    Research Image ID: MCX-CVR-2024-001 | Classification: Internal Use
+                </div>
+            </div>
+
+            <div class="access-info">
+                <div class="access-title">🔐 Research Data Access</div>
+                <p>Authorized researchers can access additional data files through our secure cloud storage system. 
+                All research materials are stored in compliance with HIPAA and institutional review board guidelines.</p>
+                
+                <p><strong>Access Requirements:</strong> Valid institutional credentials and IRB approval required. 
+                Contact your research coordinator for access procedures.</p>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Security Notice:</strong> This portal contains sensitive research data. 
+                Access is logged and monitored. Unauthorized access or data exfiltration is strictly prohibited 
+                and may result in legal action.
+            </div>
+        </div>
+
+        <div class="research-section">
+            <h3>🔬 Available Research Files</h3>
+            <ul style="margin: 20px 0; padding-left: 20px;">
+                <li>Cardiac imaging datasets (DICOM format)</li>
+                <li>Clinical trial preliminary results</li>
+                <li>Research protocols and methodologies</li>
+                <li>Authentication certificates for secure access</li>
+                <li>Data analysis scripts and tools</li>
+            </ul>
+            
+            <p style="margin-top: 20px;">
+                <strong>Azure AD Integration:</strong> This portal is integrated with Azure Active Directory 
+                for enhanced security and single sign-on capabilities.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>MediCloudX Labs © 2024 | Research Division</p>
+            <p>For technical support, contact: support@medicloudx.labs</p>
+        </div>
+    </div>
+
+    <!-- Research metadata for internal documentation -->
+    <!-- 
+    Research Project: MediCloud Cardiovascular Analysis
+    Principal Investigator: Dr. Sarah Chen
+    IRB Protocol: MCX-2024-CVR-001
+    Data Classification: Restricted
+    Last Updated: 2024-09-14
+    -->
+</body>
+</html>
